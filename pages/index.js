@@ -163,7 +163,7 @@ function Step21({hook, step}) {
 
 function Step3({hook, step}){
     return(
-        <div>Sloboz</div>
+        <div>Step3</div>
     )
 }
 
