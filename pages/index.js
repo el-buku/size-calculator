@@ -1,65 +1,171 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React, {useState} from 'react';
+import {Button, Container, Card, CardHeader, CardHeaderTitle, CardContent, Content, Title, Field, Input, Control} from 'bloomer'
+import {createGlobalState} from 'react-hooks-global-state';
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+const initialState = {
+    knowsSize: null,
+    capsuleSize: null,
+    ingredientType: null,
 }
+
+const {useGlobalState, getGlobalState} = createGlobalState(initialState);
+
+
+function App() {
+
+    const [start, useStart] = useState(false)
+    return (
+        <Container style={{marginLeft: 250, marginRight: 250}}>
+            {!start ? <Default hook={useStart}/> : <Start/>}
+
+        </Container>
+    );
+}
+
+function Default({hook}) {
+    return (
+        <Card>
+            <CardHeader>
+                <CardHeaderTitle isSize={4}>
+                    Start
+                </CardHeaderTitle>
+            </CardHeader>
+            <CardContent>
+                <Button variant="contained" color="primary" onClick={() => hook(true)}>
+                    Link
+                </Button>
+            </CardContent>
+        </Card>
+    )
+}
+
+function Start() {
+    const [step, setStep] = useState(1)
+    const hook = (step) => {
+        setStep(step + 1)
+    }
+    const getComponent = (step) => {
+        switch (step) {
+            case 1:
+                return Step1;
+            case 2:
+                return Step2;
+            case 3:
+                return Step3;
+        }
+    }
+    const Component = getComponent(step)
+    return (
+        <Component hook={hook} step={step}/>
+    )
+}
+
+function Step1({hook, step}) {
+    const [knowsSize, setKnows] = useGlobalState('knowsSize')
+    const handleClick = (bool) => {
+        setKnows(bool)
+        console.log(getGlobalState('knowsSize'))
+        hook(step)
+    }
+    return (
+        <Card>
+            <CardHeader>
+                <CardHeaderTitle isSize={4}>
+                    Do you know your capsule size?
+                </CardHeaderTitle>
+            </CardHeader>
+            <CardContent>
+
+                <Field isGrouped>
+                    <Button isFullWidth={true} isColor={'primary'} onClick={() => handleClick(true)} style={{marginLeft: 15}}>
+                        Yes
+                    </Button>
+                    <Button isFullWidth={true} isColor={'danger'} onClick={() => handleClick(false)} style={{marginLeft: 15}}>
+                        No
+                    </Button>
+                </Field>
+            </CardContent>
+        </Card>
+    )
+}
+
+
+function Step2({hook, step}) {
+    const bool = getGlobalState('knowsSize')
+    const [next, setNext] = useState(false)
+    const getComponent = (bool) => {
+        if (bool && !next) {
+            return KnowsSize
+        } else {
+            return Step21
+        }
+    }
+    const Component = getComponent(bool)
+    return (
+        <Component hook={hook} next={setNext} step={step}/>
+    )
+}
+
+function KnowsSize({next}) {
+    const [capsuleSize, setSize] = useGlobalState('capsuleSize')
+    const [value, setValue] = useState()
+    const handleClick = () =>{
+        setSize(value)
+        next(true)
+    }
+    return(
+        <Card>
+            <CardHeader>
+                <CardHeaderTitle isSize={4}>
+                    Input your capsule size
+                </CardHeaderTitle>
+            </CardHeader>
+            <CardContent>
+                <Field isGrouped={true}>
+                    <Control>
+                    <Input value={value} onChange={(e)=>{setValue(e.target.value)}}/>
+                    </Control>
+                    <Button variant="contained" color="secondary" onClick={() => handleClick()}>
+                        Next
+                    </Button>
+                </Field>
+            </CardContent>
+        </Card>
+    )
+}
+
+function Step21({hook, step}) {
+    const [ingredientType, setType] = useGlobalState('ingredientType')
+    function handleClick(type){
+        setType(type)
+        hook(step)
+    }
+    return(
+        <Card>
+            <CardHeader>
+                <CardHeaderTitle isSize={4}>
+                    What would you like to encapsulate?
+                </CardHeaderTitle>
+            </CardHeader>
+            <CardContent>
+                <Field isGrouped={true} >
+                    <Button isFullWidth={true} variant="contained" color="secondary" onClick={() => handleClick('liquid')}>
+                        Liquid
+                    </Button>
+                    <Button isFullWidth={true} variant="contained" color="secondary" onClick={() => handleClick('powder')}>
+                        Powder
+                    </Button>
+                </Field>
+            </CardContent>
+        </Card>
+    )
+}
+
+function Step3({hook, step}){
+    return(
+        <div>Sloboz</div>
+    )
+}
+
+
+export default App;
