@@ -1,11 +1,25 @@
 import React, {useState} from 'react';
-import {Button, Container, Card, CardHeader, CardHeaderTitle, CardContent, Content, Title, Field, Input, Control} from 'bloomer'
+import {
+    Button,
+    Container,
+    Card,
+    CardHeader,
+    CardHeaderTitle,
+    CardContent,
+    Content,
+    Title,
+    Field,
+    Input,
+    Control
+} from 'bloomer'
 import {createGlobalState} from 'react-hooks-global-state';
 
 const initialState = {
     knowsSize: null,
     capsuleSize: null,
     ingredientType: null,
+    density: null,
+    user:null
 }
 
 const {useGlobalState, getGlobalState} = createGlobalState(initialState);
@@ -15,10 +29,7 @@ function App() {
 
     const [start, useStart] = useState(false)
     return (
-        <Container style={{marginLeft: 250, marginRight: 250}}>
-            {!start ? <Default hook={useStart}/> : <Start/>}
-
-        </Container>
+            !start ? <Default hook={useStart}/> : <Start/>
     );
 }
 
@@ -52,6 +63,10 @@ function Start() {
                 return Step2;
             case 3:
                 return Step3;
+            case 4:
+                return Step4;
+            case 5:
+                return Step5;
         }
     }
     const Component = getComponent(step)
@@ -77,10 +92,12 @@ function Step1({hook, step}) {
             <CardContent>
 
                 <Field isGrouped>
-                    <Button isFullWidth={true} isColor={'primary'} onClick={() => handleClick(true)} style={{marginLeft: 15}}>
+                    <Button isFullWidth={true} isColor={'primary'} onClick={() => handleClick(true)}
+                            style={{marginLeft: 15}}>
                         Yes
                     </Button>
-                    <Button isFullWidth={true} isColor={'danger'} onClick={() => handleClick(false)} style={{marginLeft: 15}}>
+                    <Button isFullWidth={true} isColor={'danger'} onClick={() => handleClick(false)}
+                            style={{marginLeft: 15}}>
                         No
                     </Button>
                 </Field>
@@ -109,11 +126,11 @@ function Step2({hook, step}) {
 function KnowsSize({next}) {
     const [capsuleSize, setSize] = useGlobalState('capsuleSize')
     const [value, setValue] = useState()
-    const handleClick = () =>{
+    const handleClick = () => {
         setSize(value)
         next(true)
     }
-    return(
+    return (
         <Card>
             <CardHeader>
                 <CardHeaderTitle isSize={4}>
@@ -123,7 +140,9 @@ function KnowsSize({next}) {
             <CardContent>
                 <Field isGrouped={true}>
                     <Control>
-                    <Input value={value} onChange={(e)=>{setValue(e.target.value)}}/>
+                        <Input value={value} onChange={(e) => {
+                            setValue(e.target.value)
+                        }}/>
                     </Control>
                     <Button variant="contained" color="secondary" onClick={() => handleClick()}>
                         Next
@@ -136,11 +155,13 @@ function KnowsSize({next}) {
 
 function Step21({hook, step}) {
     const [ingredientType, setType] = useGlobalState('ingredientType')
-    function handleClick(type){
+
+    function handleClick(type) {
         setType(type)
         hook(step)
     }
-    return(
+
+    return (
         <Card>
             <CardHeader>
                 <CardHeaderTitle isSize={4}>
@@ -148,11 +169,13 @@ function Step21({hook, step}) {
                 </CardHeaderTitle>
             </CardHeader>
             <CardContent>
-                <Field isGrouped={true} >
-                    <Button isFullWidth={true} variant="contained" color="secondary" onClick={() => handleClick('liquid')}>
+                <Field isGrouped={true}>
+                    <Button isFullWidth={true} variant="contained" color="secondary"
+                            onClick={() => handleClick('liquid')}>
                         Liquid
                     </Button>
-                    <Button isFullWidth={true} variant="contained" color="secondary" onClick={() => handleClick('powder')}>
+                    <Button isFullWidth={true} variant="contained" color="secondary"
+                            onClick={() => handleClick('powder')}>
                         Powder
                     </Button>
                 </Field>
@@ -161,11 +184,82 @@ function Step21({hook, step}) {
     )
 }
 
-function Step3({hook, step}){
-    return(
-        <div>Step3</div>
+function Step3({hook, step}) {
+    const [density, setDensity] = useGlobalState('density')
+    const values = [[0.6,'Light'],[ 0.8, 'Normal'],[ 1.0, 'Dense'], [1.2,'Fine']]
+    const handleClick = (val) => {
+        setDensity(val)
+        hook(step)
+    }
+    return (
+        <Card>
+            <CardHeader>
+                <CardHeaderTitle isSize={4}>
+                    Chooose ingredient density
+                </CardHeaderTitle>
+            </CardHeader>
+            <CardContent>
+                <Field isGrouped={true}>
+                    {values.map((value) => {
+                    return(
+                        <Button isFullWidth={true} variant="contained" color="secondary" onClick={() => handleClick(value[0])}>
+                            {value[1]} {value[0]}g/ml
+                        </Button>
+                    )
+                    })}
+                </Field>
+            </CardContent>
+        </Card>
     )
 }
 
+function Step4({hook, step}){
+    const [user, setUser] = useGlobalState('user')
+    const values=['children','adults','elderly','pets']
+    const handleClick=(val)=>{
+        setUser(val)
+        hook(step)
+    }
+    return(
+        <Card>
+            <CardHeader>
+                <CardHeaderTitle isSize={4}>
+                    Who are the capsules for?
+                </CardHeaderTitle>
+            </CardHeader>
+            <CardContent>
+                <Field isGrouped={true}>
+                    {values.map((value) => {
+                        return(
+                            <Button isFullWidth={true} variant="contained" color="secondary" onClick={() => handleClick(value)}>
+                                {value}
+                            </Button>
+                        )
+                    })}
+                </Field>
+            </CardContent>
+        </Card>
+    )
+}
+
+function Step5({hook, step}){
+    const[ingredientType, setType] = useGlobalState('ingredientType')
+    const getComp=()=>{
+        if(ingredientType=='liquid'){
+            return <Step5Liquid/>
+        }
+        else if(ingredientType=='powder'){
+            return <Step5Powder/>
+        }
+    }
+    const Comp = getComp()
+    return(
+        <Comp hook={hook} step={step}/>
+    )
+}
+
+function Step5Liquid({hook, step}){
+
+}
 
 export default App;
