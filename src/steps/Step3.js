@@ -51,6 +51,9 @@ export default function Step3({hook, step, data}) {
                     )}
                 </ul>
             </Wrapper>
+            <style>
+                {".a g{fill:white !important}.a path{fill:"+textNotSelected+" !important}"}
+            </style>
             <Pagination step={step} hook={hook} data={data} disableRight={unit ? false : true}/>
         </>
     )
