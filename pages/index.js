@@ -5,11 +5,11 @@ import {
     Title,
     Wrapper,
     StartButton
-} from "../components/styled";
-import Step1 from "../components/steps/Step1"
-import Step2 from "../components/steps/Step2"
-import Step3 from "../components/steps/Step3"
-import Step4 from "../components/steps/Step4"
+} from "../src/styled";
+import Step1 from "../src/steps/Step1"
+import Step2 from "../src/steps/Step2"
+import Step3 from "../src/steps/Step3"
+import Step4 from "../src/steps/Step4"
 
 
 const initialState = {
