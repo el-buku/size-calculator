@@ -32,10 +32,10 @@ export default function Step4({hook, step, data}) {
             {name: 'Table Spoon (TBS)', value: 'tbs'},
             {name: 'Mililiter (mL)', value: 'ml'},
             {name: 'Cubic Centimeter (CC)', value: 'cc'},
-            {name: '1/8 Cup', value: '1/8 cup'},
-            {name: '1/4 Cup', value: '1/4 cup'},
-            {name: '1/2 Cup', value: '1/2 cup'},
-            {name: '1 Cup', value: '1 cup'}
+            // {name: '1/8 Cup', value: '1/8 cup'},
+            // {name: '1/4 Cup', value: '1/4 cup'},
+            // {name: '1/2 Cup', value: '1/2 cup'},
+            // {name: '1 Cup', value: '1 cup'}
         ],
         mass: [
             {name: 'Miligrams (mg)', value: 'mg'},
@@ -100,7 +100,8 @@ export default function Step4({hook, step, data}) {
             "  -webkit-appearance: none;\n" +
             "  margin: 0;\n" +
             "}input[type=number] {\n" +
-            "  -moz-appearance: textfield;\n" + "}"}</style>
+            "  -moz-appearance: textfield;\n" + "}" +
+            ""}</style>
         </>
     )
 }

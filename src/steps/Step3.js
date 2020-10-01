@@ -5,7 +5,10 @@ import styled from 'styled-components'
 const Li= styled(T1)`
     font-size:2em;
     font-weight: 900;
-    color:${props=>props.selected?textSelected:textNotSelected}
+    color:${props=>props.selected?textSelected:textNotSelected};
+    @media screen and (max-width: 650px){
+        font-size: 1.5em !important;
+    }
 `
 
 export default function Step3({hook, step, data}) {
@@ -18,10 +21,10 @@ export default function Step3({hook, step, data}) {
             {name: 'Table Spoon (TBS)', value: 'tbs'},
             {name: 'Mililiter (mL)', value: 'ml'},
             {name: 'Cubic Centimeter (CC)', value: 'cc'},
-            {name: '1/8 Cup', value: '1/8 cup'},
-            {name: '1/4 Cup', value: '1/4 cup'},
-            {name: '1/2 Cup', value: '1/2 cup'},
-            {name: '1 Cup', value: '1 cup'}
+            // {name: '1/8 Cup', value: '1/8 cup'},
+            // {name: '1/4 Cup', value: '1/4 cup'},
+            // {name: '1/2 Cup', value: '1/2 cup'},
+            // {name: '1 Cup', value: '1 cup'}
         ],
         mass: [
             {name: 'Miligrams (mg)', value: 'mg'},

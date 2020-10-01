@@ -4,32 +4,39 @@ import {
     Main,
     Title,
     Wrapper,
-    StartButton
+    StartButton, bgCol
 } from "../src/styled";
 import Step1 from "../src/steps/Step1"
 import Step2 from "../src/steps/Step2"
 import Step3 from "../src/steps/Step3"
 import Step4 from "../src/steps/Step4"
+import Step5 from "../src/steps/Step5"
+import Step6 from "../src/steps/Step6"
+
 
 
 const initialState = {
-    knowsSize: null,
     capsuleSize: null,
     ingredientType: null,
     density: null,
     user: null,
     measurementUnit: null,
     quantity: null,
+    email: null,
 }
 
 
 
 function App() {
-
     const [start, useStart] = useState(false)
     return (
         <Container>
-            <Main>
+            <style>
+                {"body{" +
+                "   background-color:" +bgCol+
+                "}"}
+            </style>
+            <Main id={'MAIN'}>
                 {!start ? <Default hook={useStart}/> : <Start/>}
             </Main>
         </Container>
@@ -86,6 +93,10 @@ class Start extends React.Component {
                     return Step4;
                 case 5:
                     return Step5;
+                case 6:
+                    return Step6;
+                case 7:
+                    return Step7;
             }
         }
         const Component = getComponent(step)

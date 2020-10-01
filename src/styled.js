@@ -20,7 +20,6 @@ const getSelected = keyframes`
 
 const Container = styled.div`
     background-color:${bgCol};
-    height: 100%;
 `
 const Main = styled.div`
     background-color:${bgCol};
@@ -48,6 +47,7 @@ const T2 = styled.h1`
 `
 
 const Title = styled(T1)`
+    color:${props=>props.col2?textSelected:textNotSelected}
     width:fit-content;
     margin:auto;
     margin-bottom:30px;
@@ -150,7 +150,7 @@ const Textspan = styled.span`
     bottom: 17.5px;
 `
 
-const Pagination = ({hook, hideLeft, disableRight, step, data, mTop = 20}) => {
+const Pagination = ({hook, hideLeft, disableRight, step, data, mTop = 20, hideRight}) => {
     return (
         <div style={{marginTop: mTop}}>
             {hideLeft ? null : <Left onClick={() => {
@@ -161,15 +161,15 @@ const Pagination = ({hook, hideLeft, disableRight, step, data, mTop = 20}) => {
                     BACK
                 </Textspan>
             </Left>}
-
-            <Right onClick={() => {
+            {hideRight? null : <Right onClick={() => {
                 hook(step, data)
             }} disabled={disableRight}>
-                <Textspan style={{right: 105}}>
+                <Textspan style={{right: 100}}>
                     NEXT
                 </Textspan>
                 <ArrowRight style={{scale: 0.5}}/>
-            </Right>
+            </Right>}
+
         </div>
     )
 }
@@ -191,5 +191,6 @@ export {
     textSelected,
     textNotSelected,
     InputWrapper,
-    bottomOffset
+    bottomOffset,
+    primaryCol, bgCol
 }
