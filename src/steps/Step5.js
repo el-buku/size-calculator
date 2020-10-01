@@ -185,7 +185,7 @@ export default function Step5({hook, step, data}) {
                 "" +
                 "@media screen and (max-width:650px){" +
                 "#MAIN{" +
-                "    height: 100%;\n" +
+                "    height: 105%;\n" +
                 "    width: fit-content;" +
                 "}" +
                 "}"}
