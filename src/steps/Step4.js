@@ -78,7 +78,7 @@ export default function Step4({hook, step, data}) {
                 </div>
                 <div style={{width: 'fit-content', marginLeft: 20}}>
                     <Btn selected={true}>
-                        SELECT ONE
+                        {type.charAt(0).toUpperCase() + type.slice(1)}
                     </Btn>
                     <ul style={{marginTop:20}}>
                         {usedUnits.map(unititem =>
