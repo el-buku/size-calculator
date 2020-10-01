@@ -76,8 +76,8 @@ export default function Step4({hook, step, data}) {
                     <InputWrapper value={quantity} onChange={(e) => handleQuantity(e)} type={"number"}/>
                 </div>
                 <div style={{width: 'fit-content', marginLeft: 20}}>
-                    <Btn onClick={() => setVal('powder')} selected={ingredientType == 'powder' ? true : false}>
-                        Powder
+                    <Btn selected={true}>
+                        {type.charAt(0).toUpperCase() + type.slice(1)}
                     </Btn>
                     <ul style={{marginTop:20}}>
                         {usedUnits.map(unititem =>
