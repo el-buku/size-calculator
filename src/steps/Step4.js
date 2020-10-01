@@ -24,6 +24,7 @@ const Bottom = styled(T1)`
 
 export default function Step4({hook, step, data}) {
     const [quantity, setQuantity] = useState(data.quantity)
+    data.quantity=quantity
     const {ingredientType, measurementUnit} = data
     const units = {
         volume: [
@@ -77,7 +78,7 @@ export default function Step4({hook, step, data}) {
                 </div>
                 <div style={{width: 'fit-content', marginLeft: 20}}>
                     <Btn selected={true}>
-                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                        SELECT ONE
                     </Btn>
                     <ul style={{marginTop:20}}>
                         {usedUnits.map(unititem =>
