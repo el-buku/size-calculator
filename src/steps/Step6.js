@@ -11,11 +11,8 @@ import {
     bottomOffset,
     primaryCol
 } from '../styled'
+import {getSize, getTypes} from '../'
 import styled from 'styled-components'
-import D1 from '../../public/svgs/density1.svg'
-import D2 from '../../public/svgs/density2.svg'
-import D3 from '../../public/svgs/density3.svg'
-import D4 from '../../public/svgs/density4.svg'
 
 const Li = styled(T1)`
     color:${props => props.selected ? textSelected : textNotSelected};
@@ -73,7 +70,9 @@ const InnerWrapper = styled.div`
     }
 `
 
-export default function Step5({hook, step, data}) {
+
+
+export default function Step6({hook, step, data, units, sizes}) {
     const [email, setEmail] = useState(data.email)
     const [err, setErr] = useState(false)
     const [selected, setSelected] = useState(false)
@@ -82,19 +81,21 @@ export default function Step5({hook, step, data}) {
         var re = /\S+@\S+\.\S+/;
         return re.test(email);
     }
-    const handleChange = (e) =>{
+    const handleChange = (e) => {
         e.preventDefault()
         const email = e.target.value
         console.log(email)
         setEmail(e.target.value)
     }
-    const handleClick = ()=>{
+    const handleClick = () => {
         setSelected(true)
-        setTimeout(()=>{
-            if(validateEmail(email)){
+        setTimeout(() => {
+            if (validateEmail(email)) {
+                const size = getSize(data, sizes)
+                data.capsuleSize=size
+                data.types=getTypes(data.user, data.ingredientType)
                 hook(step, data)
-            }
-            else {
+            } else {
                 setSelected(false);
                 setErr(true);
             }
@@ -110,12 +111,15 @@ export default function Step5({hook, step, data}) {
             </Title>
             <Wrapper style={{marginLeft: '0 !important'}}>
                 <InnerWrapper>
-                    <InputWrapper type={'text'} value={email?email:''} onChange={(e)=>handleChange(e)} /><Btn selected={selected} onClick={()=>handleClick()} style={{position:'absolute', right:0}}>Get Results</Btn>
+                    <InputWrapper type={'text'} value={email ? email : ''} onChange={(e) => handleChange(e)}/><Btn
+                    selected={selected} onClick={() => handleClick()} style={{position: 'absolute', right: 0}}>Get
+                    Results</Btn>
                 </InnerWrapper>
 
-            </Wrapper>                <Bottom>{err?'Please use a valid email address':'Check your email for your results as well as a promo code for your next purchase!'}</Bottom>
+            </Wrapper>
+            <Bottom>{err ? 'Please use a valid email address' : 'Check your email for your results as well as a promo code for your next purchase!'}</Bottom>
 
-            <Pagination step={step} hook={hook} data={data} hideRight={true}/>
+            <Pagination step={step-1} hook={hook} data={data} hideRight={true}/>
             <style>
                 {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}" +
                 "@media screen and (max-width:650px){input{padding-right:28vw !important}}"}

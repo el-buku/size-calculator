@@ -12,20 +12,41 @@ import Step3 from "../src/steps/Step3"
 import Step4 from "../src/steps/Step4"
 import Step5 from "../src/steps/Step5"
 import Step6 from "../src/steps/Step6"
-
-
+import Step7 from "../src/steps/Step7"
 
 const initialState = {
     capsuleSize: null,
     ingredientType: null,
-    density: null,
+    density: 1,
     user: null,
     measurementUnit: null,
     quantity: null,
     email: null,
+    types:[]
 }
 
+const capsuleSizes = [['000', 1.37], ['00E', 1], ['00', 0.9], ['0E', 0.78], ['0', 0.68], ['1', 0.48], ['2', 0.36], ['3', 0.27], ['4', 0.2], ['5', 0.13]]
 
+const units = {
+    volume: [
+        {name: 'Tea Spoon (TS)', value: 'ts'},
+        {name: 'Table Spoon (TBS)', value: 'tbs'},
+        {name: 'Mililiter (mL)', value: 'ml'},
+        {name: 'Cubic Centimeter (CC)', value: 'cc'},
+        // {name: '1/8 Cup', value: '1/8 cup'},
+        // {name: '1/4 Cup', value: '1/4 cup'},
+        // {name: '1/2 Cup', value: '1/2 cup'},
+        // {name: '1 Cup', value: '1 cup'}
+    ],
+    mass: [
+        {name: 'Miligrams (mg)', value: 'mg'},
+        {name: 'Micrograms (mcg)', value: 'mcg'},
+        {name: 'Grams (g)', value: 'g'},
+        // {name: 'Kilograms (kg)', value: 'kg'},
+        // {name: 'Pounds (lb)', value: 'lb'},
+        // {name: 'Ounces (oz)', value: 'oz'}
+    ]
+}
 
 function App() {
     const [start, useStart] = useState(false)
@@ -33,7 +54,7 @@ function App() {
         <Container>
             <style>
                 {"body{" +
-                "   background-color:" +bgCol+
+                "   background-color:" + bgCol +
                 "}"}
             </style>
             <Main id={'MAIN'}>
@@ -101,7 +122,7 @@ class Start extends React.Component {
         }
         const Component = getComponent(step)
         return (
-            <Component hook={this.hook} step={step} data={data}/>
+            <Component hook={this.hook} step={step} data={data} sizes={capsuleSizes} units={units}/>
         )
     }
 }

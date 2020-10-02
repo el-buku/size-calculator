@@ -64,7 +64,7 @@ const Wrapper = styled.div`
     }
 `
 
-export default function Step5({hook, step, data}) {
+export default function Step5({hook, step, data, units}) {
     const [density, setDensity] = useState(data.density)
     const [selected, setSelected] = useState(null)
     data.density=density
@@ -74,29 +74,10 @@ export default function Step5({hook, step, data}) {
     const getComp = (val) => {
         return (comps[val])
     }
-    const units = {
-        volume: [
-            {name: 'Tea Spoon (TS)', value: 'ts'},
-            {name: 'Table Spoon (TBS)', value: 'tbs'},
-            {name: 'Mililiter (mL)', value: 'ml'},
-            {name: 'Cubic Centimeter (CC)', value: 'cc'},
-            {name: '1/8 Cup', value: '1/8 cup'},
-            {name: '1/4 Cup', value: '1/4 cup'},
-            {name: '1/2 Cup', value: '1/2 cup'},
-            {name: '1 Cup', value: '1 cup'}
-        ],
-        mass: [
-            {name: 'Miligrams (mg)', value: 'mg'},
-            {name: 'Micrograms (mcg)', value: 'mcg'},
-            {name: 'Grams (g)', value: 'g'},
-            {name: 'Kilograms (kg)', value: 'kg'},
-            {name: 'Pounds (lb)', value: 'lb'},
-            {name: 'Ounces (oz)', value: 'oz'}
-        ]
-    }
     var usedUnits = []
     var type
     if (ingredientType == 'liquid') {
+        hook(step,data)
         usedUnits = units.volume;
         type = "Volume"
     } else {
@@ -128,13 +109,14 @@ export default function Step5({hook, step, data}) {
             else setDensity(null);
         }
     }
+
     return (
         <>
             <Subtitle>
                 {type} Measurements
             </Subtitle>
             <Title>
-                Choose or enter your density
+                Choose or enter your density (g/ml)
             </Title>
             <Wrapper style={{marginLeft: '0 !important'}}>
                 <div style={{width: '100%!important', margin:'0 !important'}} className={'wrap'}>

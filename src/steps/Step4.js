@@ -1,6 +1,8 @@
 import {useState} from 'react'
 import {Title, Wrapper, T1, Pagination, Subtitle, textSelected, textNotSelected, Btn, InputWrapper, bottomOffset} from '../styled'
+import {getQtyMl, getMlToQty} from '../'
 import styled from 'styled-components'
+
 
 const Li = styled(T1)`
     color:${props => props.selected ? textSelected : textNotSelected};
@@ -22,30 +24,10 @@ const Bottom = styled(T1)`
     }
 `
 
-export default function Step4({hook, step, data}) {
-    const [quantity, setQuantity] = useState(data.quantity)
+export default function Step4({hook, step, data, units, sizes}) {
+    const [quantity, setQuantity] = useState(0)
     data.quantity=quantity
-    const {ingredientType, measurementUnit} = data
-    const units = {
-        volume: [
-            {name: 'Tea Spoon (TS)', value: 'ts'},
-            {name: 'Table Spoon (TBS)', value: 'tbs'},
-            {name: 'Mililiter (mL)', value: 'ml'},
-            {name: 'Cubic Centimeter (CC)', value: 'cc'},
-            // {name: '1/8 Cup', value: '1/8 cup'},
-            // {name: '1/4 Cup', value: '1/4 cup'},
-            // {name: '1/2 Cup', value: '1/2 cup'},
-            // {name: '1 Cup', value: '1 cup'}
-        ],
-        mass: [
-            {name: 'Miligrams (mg)', value: 'mg'},
-            {name: 'Micrograms (mcg)', value: 'mcg'},
-            {name: 'Grams (g)', value: 'g'},
-            {name: 'Kilograms (kg)', value: 'kg'},
-            {name: 'Pounds (lb)', value: 'lb'},
-            {name: 'Ounces (oz)', value: 'oz'}
-        ]
-    }
+    const {ingredientType, measurementUnit, user} = data
     var usedUnits = []
     var type
     if (ingredientType == 'liquid') {
@@ -57,11 +39,31 @@ export default function Step4({hook, step, data}) {
     }
     const handleQuantity = (e) => {
         e.preventDefault()
-        const quantity = e.target.value
+        var quantity = e.target.value
         if(quantity && parseFloat(quantity)>=0) {
-            if (parseFloat(quantity)) setQuantity(parseFloat(quantity))
+            if (parseFloat(quantity)) {
+                if (ingredientType == 'liquid') {
+                var siz=sizes
+                if (user == 'children') {
+                    siz=sizes.slice(-5)
+                } else if (user == 'elderly') {
+                    siz=sizes.slice(-6)
+                }
+                const maxml = siz[0][1]
+                const mls = getQtyMl(parseFloat(quantity), measurementUnit)
+                if(mls<=maxml*0.8)
+                    setQuantity(parseFloat(quantity))
+                else{
+                    quantity=getMlToQty(maxml*0.8, measurementUnit)
+                    setQuantity(parseFloat(quantity.toFixed(3)))
+                }
+                }else{
+                    setQuantity(parseFloat(quantity))
+                }
+
+            }
         } else {
-            setQuantity(null)
+            setQuantity(0)
         }
     }
     return (
@@ -70,7 +72,7 @@ export default function Step4({hook, step, data}) {
                 {type} Measurements
             </Subtitle>
             <Title>
-                Enter your {type.toLowerCase()} quantity
+                Enter your {type.toLowerCase()} quantity for one capsule
             </Title>
             <Wrapper>
                 <div style={{width: 'fit-content', marginRight: 20}} className={'wrap'}>
@@ -89,7 +91,7 @@ export default function Step4({hook, step, data}) {
                 </div>
 
             </Wrapper>
-            <Bottom>{quantity?quantity:0} {measurementUnit} per serving size</Bottom>
+            <Bottom>{quantity?quantity:0} {measurementUnit} per capsule</Bottom>
 
             <Pagination step={step} hook={hook} data={data} disableRight={quantity ? false : true}/>
             <style>

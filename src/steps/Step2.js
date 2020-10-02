@@ -41,7 +41,7 @@ export default function Step2({hook, step, data}) {
                         <div key={value}
                              style={{width: 'fit-content', marginLeft: 15, marginRight: 15, textAlign: 'center'}}>
 
-                            <Btn selected={value == user ? true : false} onClick={() => setUser(value)}>
+                            <Btn selected={value == user ? true : false} onClick={() => {setUser(value); setTimeout(()=>{data.user=value; hook(step, data)}, 500)}}>
                                 {getCompByVal(value)}
                             </Btn>
                             {value == user ? <T1 style={{fontSize: '2vw'}}>{value.toUpperCase()}</T1> : <T2>{value.toUpperCase()}</T2>}
@@ -49,7 +49,7 @@ export default function Step2({hook, step, data}) {
                     )
                 })}
             </Wrapper>
-            <Pagination step={step} hook={hook} data={data} disableRight={user ? false : true}/>
+            <Pagination step={step} hook={hook} data={data} hideRight={true}/>
             <style>
                 {"button{    width: 19vw !important;\n" +
                 "    height: 19vw !important;\n" +
