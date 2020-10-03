@@ -8,8 +8,7 @@ import {
     textNotSelected,
     Btn,
     InputWrapper,
-    bottomOffset,
-    primaryCol
+    bottomOffset
 } from '../styled'
 import {getSize, getTypes} from '../'
 import styled from 'styled-components'
@@ -71,11 +70,13 @@ const InnerWrapper = styled.div`
 `
 
 
-
 export default function Step6({hook, step, data, units, sizes}) {
     const [email, setEmail] = useState(data.email)
     const [err, setErr] = useState(false)
     const [selected, setSelected] = useState(false)
+    const size = getSize(data, sizes)
+    data.capsuleSize = size
+    data.types = getTypes(data.user, data.ingredientType)
     data.email = email
     const validateEmail = (email) => {
         var re = /\S+@\S+\.\S+/;
@@ -91,9 +92,6 @@ export default function Step6({hook, step, data, units, sizes}) {
         setSelected(true)
         setTimeout(() => {
             if (validateEmail(email)) {
-                const size = getSize(data, sizes)
-                data.capsuleSize=size
-                data.types=getTypes(data.user, data.ingredientType)
                 hook(step, data)
             } else {
                 setSelected(false);
@@ -101,8 +99,9 @@ export default function Step6({hook, step, data, units, sizes}) {
             }
         }, 500)
     }
+    console.log(size)
     return (
-        <>
+        <> {size == undefined ? <NoSize hook={hook} data={data} step={step}/> : (<>
             <Subtitle>
                 Your results are ready!
             </Subtitle>
@@ -119,7 +118,35 @@ export default function Step6({hook, step, data, units, sizes}) {
             </Wrapper>
             <Bottom>{err ? 'Please use a valid email address' : 'Check your email for your results as well as a promo code for your next purchase!'}</Bottom>
 
-            <Pagination step={step-1} hook={hook} data={data} hideRight={true}/>
+            <Pagination step={step - 1} hook={hook} data={data} hideRight={true}/>
+            <style>
+                {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}" +
+                "@media screen and (max-width:650px){input{padding-right:28vw !important}}"}
+            </style>
+
+        </>)
+        }</>
+    )
+}
+
+function NoSize({hook, data, step}) {
+    return (
+        <>
+            {/*<Subtitle>*/}
+            {/*    Your results are ready!*/}
+            {/*</Subtitle>*/}
+            <Title>
+                No size available
+            </Title>
+            <Wrapper>
+                <Tl>
+                    No size recommendation available. Please edit your input and come back.
+                </Tl>
+
+            </Wrapper>
+            {/*<Bottom>{err ? 'Please use a valid email address' : 'Check your email for your results as well as a promo code for your next purchase!'}</Bottom>*/}
+
+            <Pagination step={step - 1} hook={hook} data={data} hideRight={true}/>
             <style>
                 {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}" +
                 "@media screen and (max-width:650px){input{padding-right:28vw !important}}"}
