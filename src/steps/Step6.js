@@ -92,7 +92,16 @@ export default function Step6({hook, step, data, units, sizes}) {
         setSelected(true)
         setTimeout(() => {
             if (validateEmail(email)) {
-                hook(step, data)
+                fetch(`/api/add`, {
+                    method: "post",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify({
+                        sloboz:'cacat'
+                    })
+                }).then(response=>response.json().then(res=>console.log(res)))
+                // hook(step, data)
             } else {
                 setSelected(false);
                 setErr(true);
