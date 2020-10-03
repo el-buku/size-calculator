@@ -15,7 +15,7 @@ const bottomOffset = '15px'
 
 const getSelected = keyframes`
     from {background-color: ${secondaryCol};}
-    to {background-color:${primaryCol};}
+    to {background-color:${props=>props.theme.main};}
 `
 
 const Container = styled.div`
@@ -105,7 +105,7 @@ const Btn = styled.button`
     font-family: ${font1};
     font-weight: 900;
     font-size:2.5vw;
-    background-color:${props => props.selected ? 'gold' : 'grey'};
+    background-color:${props => props.selected ? props=>props.theme.main : secondaryCol};
     animation:${props => props.selected ? getSelected : null} 0.3s;
     color: white;
     border-radius: 10vw;
@@ -154,7 +154,7 @@ const Textspan = styled.span`
 
 const Pagination = ({hook, hideLeft, disableRight, step, data, mTop = 20, hideRight}) => {
     return (
-        <div style={{marginTop: mTop}}>
+        <div className={'pagination'} style={{marginTop: mTop}}>
             {hideLeft ? null : <Left onClick={() => {
                 hook(step - 2)
             }}>

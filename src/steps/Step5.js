@@ -9,9 +9,8 @@ import {
     Btn,
     InputWrapper,
     bottomOffset,
-    primaryCol
 } from '../styled'
-import styled from 'styled-components'
+import styled, {withTheme} from 'styled-components'
 import D1 from '../../public/svgs/density1.svg'
 import D2 from '../../public/svgs/density2.svg'
 import D3 from '../../public/svgs/density3.svg'
@@ -64,7 +63,7 @@ const Wrapper = styled.div`
     }
 `
 
-export default function Step5({hook, step, data, units}) {
+function Step5({hook, step, data, units, theme}) {
     const [density, setDensity] = useState(data.density)
     const [selected, setSelected] = useState(null)
     data.density=density
@@ -163,7 +162,7 @@ export default function Step5({hook, step, data, units}) {
             "    margin-top: 50px !important;\n" +
             "    display: inline-flex;\n" +
             "}.z{margin-top:15px;} h1{margin-bottom:5px!important}"}
-                {".plm g{fill:white !important}.plm path{fill:"+primaryCol+" !important}" +
+                {".plm g{fill:white !important}.plm path{fill:"+theme.main+" !important}" +
                 "" +
                 "@media screen and (max-width:650px){" +
                 "#MAIN{" +
@@ -175,3 +174,5 @@ export default function Step5({hook, step, data, units}) {
         </>
     )
 }
+
+export default withTheme(Step5)

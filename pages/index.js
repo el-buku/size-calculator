@@ -48,7 +48,7 @@ const units = {
     ]
 }
 
-function App() {
+function App({domain}) {
     const [start, useStart] = useState(false)
     return (
         <Container>
@@ -58,11 +58,13 @@ function App() {
                 "}"}
             </style>
             <Main id={'MAIN'}>
-                {!start ? <Default hook={useStart}/> : <Start/>}
+                {!start ? <Default hook={useStart}/> : <Start domain={domain}/>}
             </Main>
         </Container>
     );
 }
+
+
 
 
 function Default({hook}) {
@@ -84,7 +86,7 @@ function Default({hook}) {
 class Start extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {step: 1, data: initialState}
+        this.state = {step: 1, data: {domain:this.props.domain, ...initialState}}
         this.hook = this.hook.bind(this)
     }
 

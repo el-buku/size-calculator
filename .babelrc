@@ -2,6 +2,6 @@
   "plugins": [
     "inline-react-svg"
   ,["styled-components", { "ssr": true,
-      "displayNames": true
+      "displayNames": false
     }]]
 }
