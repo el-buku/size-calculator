@@ -1,19 +1,5 @@
 export const getSize = (data, sizes) => {
-    const getQtyMg = (quantity, measurementUnit) => {
-        var ret
-        switch (measurementUnit) {
-            case 'mg':
-                ret = quantity * 1000
-                break
-            case 'mcg':
-                ret = quantity * 1000000
-                break
-            case 'g':
-                ret = quantity
-                break
-        }
-        return ret
-    }
+
 
     const getSizes = (ml, user, sizes) => {
         var ret = []
@@ -33,13 +19,14 @@ export const getSize = (data, sizes) => {
     const {ingredientType, measurementUnit, quantity, density, user} = data
     var capsuleMl, capsuleMg
     if (ingredientType == "powder") {
-        capsuleMg = getQtyMg(quantity, measurementUnit)
+        capsuleMg = getQtyToG(quantity, measurementUnit)
         capsuleMl = capsuleMg * density
 
     } else {
         capsuleMl=getQtyMl(quantity, measurementUnit)
     }
     const recommendedSizes = getSizes(capsuleMl, user, sizes)
+    console.log(recommendedSizes)
     return recommendedSizes[0]
 
 }
@@ -82,4 +69,20 @@ export const getTypes = (user, ingredientType) => {
     } else {
         return 'Vegetarian'
     }
+}
+
+export const getQtyToG = (quantity, measurementUnit) => {
+    var ret
+    switch (measurementUnit) {
+        case 'mg':
+            ret = quantity / 1000
+            break
+        case 'mcg':
+            ret = quantity / 1000000
+            break
+        case 'g':
+            ret = quantity
+            break
+    }
+    return ret
 }

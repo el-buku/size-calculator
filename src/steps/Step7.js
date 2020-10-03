@@ -8,8 +8,7 @@ import {
     textNotSelected,
     Btn,
     InputWrapper,
-    bottomOffset,
-    primaryCol
+    bottomOffset
 } from '../styled'
 import styled from 'styled-components'
 import Liquid from '../../public/svgs/liquidcaps.svg'
@@ -24,7 +23,7 @@ const Li = styled(T1)`
     }
 `
 const Bottom = styled(T1)`
-    font-size:2em;
+    font-size:2vw;
     text-align: center;
     line-height: 3vw;
     font-weight: 900;
@@ -42,9 +41,9 @@ const Tl = styled(T1)`
     color:${props => props.col2 ? textSelected : textNotSelected}
     width:fit-content;
     margin:${props => props.m ? '0' : 'auto'};
-    margin-bottom:30px;
+    margin-bottom:10px;
     text-align: justify;
-    font-size: 2.7vw;
+    font-size: 2.3vw;
     @media screen and (max-width: 650px){
         width: 100% !important;
         font-size: 4vw;
@@ -73,8 +72,8 @@ const InnerWrapper = styled.div`
 `
 
 const Button = styled(Btn)`
-    height:12vw;
-    width:24vw;
+    height:8vw;
+    width:100%;
 `
 
 export default function Step7({hook, step, data, sizes}) {
@@ -89,9 +88,9 @@ export default function Step7({hook, step, data, sizes}) {
             </Title>
             <Wrapper>
                 <div>
-                    {ingredientType=='liquid'?<Liquid style={{maxWidth:'22vw'}}/>:<Powder  style={{maxWidth:'22vw'}}/>}
+                    {ingredientType=='liquid'?<Liquid className={'a'} style={{maxWidth:'22vw', paddingTop:20}}/>:<Powder className={'a'} style={{maxWidth:'22vw', paddingTop:20}}/>}
                 </div>
-                <div style={{width:'fit-content', marginLeft:15}}>
+                <div className={'b'} style={{width:'fit-content', paddingLeft:20, paddingTop:20,paddingRight:20, margin:'auto'}}>
                     <Tl>
                         Recommended Capsule Size : {capsuleSize}
                     </Tl>
@@ -99,14 +98,15 @@ export default function Step7({hook, step, data, sizes}) {
                         Recommended Capsule Types : {types}
                     </Tl>
                     <Button selected={true}>SHOP SIZE {capsuleSize}</Button>
+                    <Bottom>Need size {capsuleSize} in bulk? <br/> Size {capsuleSize} Articles & Blog</Bottom>
 
                 </div>
+
             </Wrapper>
-            <Bottom>Need size {capsuleSize} in bulk?<br/>Size {capsuleSize} Articles & Blog</Bottom>
             <Pagination step={step} hook={hook} data={data} hideRight={true}/>
             <style>
-                {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}" +
-                "@media screen and (max-width:650px){input{padding-right:28vw !important}}"}
+                {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}.a{margin:auto}" +
+                "@media screen and (max-width:650px){input{padding-right:28vw !important}.a{max-width:44vw!important}#MAIN{padding-top:15px !important}}"}
             </style>
 
         </>

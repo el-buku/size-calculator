@@ -1,6 +1,17 @@
 import {useState} from 'react'
-import {Title, Wrapper, T1, Pagination, Subtitle, textSelected, textNotSelected, Btn, InputWrapper, bottomOffset} from '../styled'
-import {getQtyMl, getMlToQty} from '../'
+import {
+    Title,
+    Wrapper,
+    T1,
+    Pagination,
+    Subtitle,
+    textSelected,
+    textNotSelected,
+    Btn,
+    InputWrapper,
+    bottomOffset
+} from '../styled'
+import {getQtyMl, getMlToQty, getQtyToG} from '../'
 import styled from 'styled-components'
 
 
@@ -25,8 +36,8 @@ const Bottom = styled(T1)`
 `
 
 export default function Step4({hook, step, data, units, sizes}) {
-    const [quantity, setQuantity] = useState(0)
-    data.quantity=quantity
+    const [quantity, setQuantity] = useState(data.quantity)
+    data.quantity = quantity
     const {ingredientType, measurementUnit, user} = data
     var usedUnits = []
     var type
@@ -40,30 +51,45 @@ export default function Step4({hook, step, data, units, sizes}) {
     const handleQuantity = (e) => {
         e.preventDefault()
         var quantity = e.target.value
-        if(quantity && parseFloat(quantity)>=0) {
+        if (quantity && parseFloat(quantity) >= 0) {
             if (parseFloat(quantity)) {
-                if (ingredientType == 'liquid') {
-                var siz=sizes
+                var siz = sizes
+                var mls, gs
                 if (user == 'children') {
-                    siz=sizes.slice(-5)
+                    siz = sizes.slice(-5)
                 } else if (user == 'elderly') {
-                    siz=sizes.slice(-6)
+                    siz = sizes.slice(-6)
                 }
                 const maxml = siz[0][1]
-                const mls = getQtyMl(parseFloat(quantity), measurementUnit)
-                if(mls<=maxml*0.8)
-                    setQuantity(parseFloat(quantity))
-                else{
-                    quantity=getMlToQty(maxml*0.8, measurementUnit)
-                    setQuantity(parseFloat(quantity.toFixed(3)))
-                }
-                }else{
-                    setQuantity(parseFloat(quantity))
+                if (ingredientType == 'liquid') {
+                    mls = getQtyMl(parseFloat(quantity), measurementUnit)
+                    if (mls <= maxml * 0.8)
+                        setQuantity(parseFloat(quantity))
+                    else {
+                        quantity = getMlToQty(maxml * 0.8, measurementUnit)
+                        setQuantity(parseFloat(quantity.toFixed(3)))
+                    }
+                } else {
+                    gs = getQtyToG(quantity, measurementUnit)
+                    mls = gs * data.density
+                    if (mls <= maxml * 0.8)
+                        setQuantity(parseFloat(quantity))
+                    else {
+                        quantity = maxml*0.8*data.density
+                        switch (measurementUnit){
+                            case 'mcg':
+                                quantity=quantity*1000000
+                                break
+                            case 'mg':
+                                quantity=quantity*1000
+                        }
+                        setQuantity(parseFloat(quantity.toFixed(3)))
+                    }
                 }
 
             }
         } else {
-            setQuantity(0)
+            setQuantity('')
         }
     }
     return (
@@ -82,7 +108,7 @@ export default function Step4({hook, step, data, units, sizes}) {
                     <Btn selected={true}>
                         {type.charAt(0).toUpperCase() + type.slice(1)}
                     </Btn>
-                    <ul style={{marginTop:20}}>
+                    <ul style={{marginTop: 20, padding:0}}>
                         {usedUnits.map(unititem =>
                             <li key={unititem.value}><Li selected={unititem.value == measurementUnit ? true : false}><a
                                 style={{color: 'inherit'}}>• {unititem.name}</a></Li></li>
@@ -91,7 +117,7 @@ export default function Step4({hook, step, data, units, sizes}) {
                 </div>
 
             </Wrapper>
-            <Bottom>{quantity?quantity:0} {measurementUnit} per capsule</Bottom>
+            <Bottom>{quantity ? quantity : 0} {measurementUnit} per capsule</Bottom>
 
             <Pagination step={step} hook={hook} data={data} disableRight={quantity ? false : true}/>
             <style>

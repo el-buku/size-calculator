@@ -130,8 +130,8 @@ export default function Step5({hook, step, data, units}) {
                         <Tl style={{float:'left', textAlign:'justify', margin:'0 !important'}}>Determine density</Tl>
                         <div className={'c'}>
                             {values.map(value => {
-                                    const Comp = getComp(values.indexOf(value))
-                                    return(<div onClick={()=>handleSelect(value)} className={'b'}><Comp className={selected==values.indexOf(value)?'plm svg':'svg'}/>{value[1]}</div>)
+                                const Comp = getComp(values.indexOf(value))
+                                return(<div onClick={()=>handleSelect(value)} className={'b'}><Comp className={selected==values.indexOf(value)?'plm svg':'svg'}/>{value[1]}</div>)
 
                             })}
                         </div>
@@ -167,7 +167,7 @@ export default function Step5({hook, step, data, units}) {
                 "" +
                 "@media screen and (max-width:650px){" +
                 "#MAIN{" +
-                "    height: 105%;\n" +
+                "    height: 126%;\n" +
                 "    width: fit-content;" +
                 "}" +
                 "}"}

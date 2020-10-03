@@ -146,6 +146,8 @@ const StartButton = ({onClick, children, mr, ml, sel}) => {
 }
 
 const Textspan = styled.span`
+    font-family: ${font2};
+    font-weight: 200;
     position: absolute;
     bottom: 17.5px;
 `
