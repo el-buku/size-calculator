@@ -2,15 +2,13 @@ export const getSize = (data, sizes) => {
 
 
     const getSizes = (ml, user, sizes) => {
-        var ret = []
+        var ret = [], siz
         if (user == 'children') {
-            sizes.slice(-5)
+            siz=sizes.slice(5)
         } else if (user == 'elderly') {
-            sizes.slice(-6)
+            siz=sizes.slice(-6)
         }
-        console.log(ml)
-        for (var size of sizes) {
-            console.log(size[1])
+        for (var size of siz) {
             if (ml <= size[1] * 0.8)
                 ret.push(size[0])
         }

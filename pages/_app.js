@@ -6,7 +6,7 @@ import {ThemeProvider} from 'styled-components'
 function MyApp({Component, pageProps, stars}) {
     const domain = stars.domain
     var col
-    if(domain!='cacat')
+    if(domain!='kcaps')
         col='gold'
     else col = 'black'
     const theme={main:col}
