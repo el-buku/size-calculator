@@ -8,7 +8,7 @@ function MyApp({Component, pageProps, stars}) {
     var col
     if(domain!='kcaps')
         col='gold'
-    else col = 'black'
+    else col = '#1e8065'
     const theme={main:col}
     return (
         <><Head>
