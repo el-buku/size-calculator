@@ -60,6 +60,7 @@ export default function Step4({hook, step, data, units, sizes}) {
                 } else if (user == 'elderly') {
                     siz = sizes.slice(-6)
                 }
+                console.log(sizes)
                 const maxml = siz[0][1]
                 if (ingredientType == 'liquid') {
                     mls = getQtyMl(parseFloat(quantity), measurementUnit)

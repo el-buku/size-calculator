@@ -2,12 +2,13 @@ export const getSize = (data, sizes) => {
 
 
     const getSizes = (ml, user, sizes) => {
-        var ret = [], siz
+        var ret = [], siz=sizes
         if (user == 'children') {
-            siz=sizes.slice(5)
+            siz=sizes.slice(-5)
         } else if (user == 'elderly') {
             siz=sizes.slice(-6)
         }
+        console.log(siz)
         for (var size of siz) {
             if (ml <= size[1] * 0.8)
                 ret.push(size[0])
@@ -23,9 +24,10 @@ export const getSize = (data, sizes) => {
     } else {
         capsuleMl=getQtyMl(quantity, measurementUnit)
     }
+    console.log('pulaaa'+sizes)
+    console.log(capsuleMl, user, sizes)
     const recommendedSizes = getSizes(capsuleMl, user, sizes)
-    console.log(recommendedSizes)
-    return recommendedSizes[0]
+    return recommendedSizes.reverse()[0]
 
 }
 

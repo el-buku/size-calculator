@@ -25,7 +25,6 @@ const initialState = {
     types:[]
 }
 
-const capsuleSizes = [['000', 1.37], ['00E', 1], ['00', 0.9], ['0E', 0.78], ['0', 0.68], ['1', 0.48], ['2', 0.36], ['3', 0.27], ['4', 0.2], ['5', 0.13]]
 
 const units = {
     volume: [
@@ -86,7 +85,13 @@ function Default({hook}) {
 class Start extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {step: 1, data: {domain:this.props.domain, ...initialState}}
+        // var sizes=[['000', 1.37], ['00E', 1], ['00', 0.9], ['0E', 0.78], ['0', 0.68], ['1', 0.48], ['2', 0.36], ['3', 0.27], ['4', 0.2], ['5', 0.13]]
+        var sizes
+        if(this.props.domain=='capsuline')
+            sizes=[['000', 1.37], ['00', 0.9], ['0E', 0.78], ['0', 0.68], ['1', 0.48], ['2', 0.36], ['3', 0.27], ['4', 0.2]]
+        else sizes=[['00E', 1], ['00', 0.9], ['0E', 0.78], ['0', 0.68], ['1', 0.48], ['2', 0.36], ['3', 0.27], ['4', 0.2]]
+        // console.log(capsuleSizes)
+        this.state = {step: 1, data: {domain:this.props.domain, sizes:sizes, ...initialState}}
         this.hook = this.hook.bind(this)
     }
 
@@ -124,7 +129,7 @@ class Start extends React.Component {
         }
         const Component = getComponent(step)
         return (
-            <Component hook={this.hook} step={step} data={data} sizes={capsuleSizes} units={units}/>
+            <Component hook={this.hook} step={step} data={data} sizes={data.sizes} units={units}/>
         )
     }
 }

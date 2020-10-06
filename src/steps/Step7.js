@@ -77,7 +77,21 @@ const Button = styled(Btn)`
 `
 
 export default function Step7({hook, step, data, sizes}) {
-    const {capsuleSize, types, ingredientType} = data
+    const {capsuleSize, types, ingredientType, domain} = data
+    const [selected, setSelected] = useState(false)
+    const genTypeUrl = (type)=> {
+        if (domain == 'capsuline')
+            return `https://capsuline.com/collections/empty-${type.toLowerCase()}-capsules-size-${capsuleSize}/#utm_source=sizechart_results&utm_medium=survey&utm_campaign=leads`;
+        else return `https://www.kcaps.com/collections/all-k-caps/size-${capsuleSize}`;
+    }
+    const handleClick = () => {
+        setSelected(true)
+        var url;
+        if (domain == 'capsuline')
+            url=`https://capsuline.com/collections/empty-capsules-size-${capsuleSize}/#utm_source=sizechart_results&utm_medium=survey&utm_campaign=leads`
+        else url=`https://www.kcaps.com/collections/all-k-caps/size-${capsuleSize}`
+        window.location.href=url
+    }
     return (
         <>
             <Subtitle>
@@ -95,10 +109,10 @@ export default function Step7({hook, step, data, sizes}) {
                         Recommended Capsule Size : {capsuleSize}
                     </Tl>
                     <Tl>
-                        Recommended Capsule Types : {types}
+                        Recommended Capsule Types : {types.split(',').map(type=>{return <a key={type} href={genTypeUrl(type)}>{type}{types.split(',').length>1?',':null}</a>})}
                     </Tl>
-                    <Button selected={true}>SHOP SIZE {capsuleSize}</Button>
-                    <Bottom>Need size {capsuleSize} in bulk? <br/> Size {capsuleSize} Articles & Blog</Bottom>
+                    <Button selected={selected} onClick={()=>handleClick()}>SHOP SIZE {capsuleSize}</Button>
+                    {/*<Bottom>Need size {capsuleSize} in bulk? <br/> Size {capsuleSize} Articles & Blog</Bottom>*/}
 
                 </div>
 

@@ -3,9 +3,11 @@ import {Title, Wrapper, Btn, Pagination, textNotSelected} from '../styled'
 import Liquid from '../../public/svgs/liquidcaps.svg'
 import Powder from '../../public/svgs/powdercaps.svg'
 
-export default function Step1({hook, step, data}) {
+export default function Step1({hook, step, data, sizes}) {
     const [ingredientType, setType] = useState(data.ingredientType)
     data.ingredientType = ingredientType
+    console.log(data)
+    data.sizes=sizes
     return (
         <>
             <Title>
@@ -13,7 +15,7 @@ export default function Step1({hook, step, data}) {
             </Title>
             <Wrapper>
                 <div style={{width: 'fit-content', marginRight: 20, position:'relative'}}>
-                    <Btn onClick={() => {setType('liquid');setTimeout(()=>{data.ingredientType= 'liquid';hook(step, data)}, 500)}} selected={ingredientType == 'liquid' ? true : false}>
+                    <Btn onClick={() => {setType('liquid');setTimeout(()=>{data.ingredientType= 'liquid';data.sizes=sizes.slice(1);hook(step, data)}, 500)}} selected={ingredientType == 'liquid' ? true : false}>
                         Liquid
                     </Btn>
                     <Liquid style={{position:'absolute', transform:'scale(0.8)', top: '11vw', right:'0vw', maxWidth:'22vw'}} className={ingredientType == 'liquid' ? 'a' : 'plm a'}/>

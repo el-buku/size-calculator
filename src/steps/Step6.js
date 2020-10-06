@@ -77,7 +77,7 @@ export default function Step6({hook, step, data, units, sizes}) {
     const [email, setEmail] = useState(data.email)
     const [err, setErr] = useState(false)
     const [selected, setSelected] = useState(false)
-    const size = getSize(data, sizes)
+    const size = getSize(data, data.sizes)
     data.capsuleSize = size
     data.types = getTypes(data.user, data.ingredientType)
     data.email = email

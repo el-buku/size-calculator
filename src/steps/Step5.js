@@ -76,7 +76,6 @@ function Step5({hook, step, data, units, theme}) {
     var usedUnits = []
     var type
     if (ingredientType == 'liquid') {
-        hook(step,data)
         usedUnits = units.volume;
         type = "Volume"
     } else {
@@ -109,8 +108,8 @@ function Step5({hook, step, data, units, theme}) {
         }
     }
 
-    return (
-        <>
+    return (<>
+        {ingredientType == 'liquid' ? hook(step, data) : <>
             <Subtitle>
                 {type} Measurements
             </Subtitle>
@@ -118,25 +117,29 @@ function Step5({hook, step, data, units, theme}) {
                 Choose or enter your density (g/ml)
             </Title>
             <Wrapper style={{marginLeft: '0 !important'}}>
-                <div style={{width: '100%!important', margin:'0 !important'}} className={'wrap'}>
-                    <div style={{display:'inline-flex', width:'100% !important'}}>
-                        <Tl style={{textAlign:'inherit'}}>Your previous selection:</Tl>
-                        <Tl style={{color:textNotSelected}} className={"a"}>
+                <div style={{width: '100%!important', margin: '0 !important'}} className={'wrap'}>
+                    <div style={{display: 'inline-flex', width: '100% !important'}}>
+                        <Tl style={{textAlign: 'inherit'}}>Your previous selection:</Tl>
+                        <Tl style={{color: textNotSelected}} className={"a"}>
                             • {unitname}
                         </Tl>
                     </div>
-                    <div style={{display:'block', width:'100% !important'}} className={'z'}>
-                        <Tl style={{float:'left', textAlign:'justify', margin:'0 !important'}}>Determine density</Tl>
+                    <div style={{display: 'block', width: '100% !important'}} className={'z'}>
+                        <Tl style={{float: 'left', textAlign: 'justify', margin: '0 !important'}}>Determine density</Tl>
                         <div className={'c'}>
                             {values.map(value => {
                                 const Comp = getComp(values.indexOf(value))
-                                return(<div onClick={()=>handleSelect(value)} className={'b'}><Comp className={selected==values.indexOf(value)?'plm svg':'svg'}/>{value[1]}</div>)
+                                return (<div onClick={() => handleSelect(value)} className={'b'}><Comp
+                                    className={selected == values.indexOf(value) ? 'plm svg' : 'svg'}/>{value[1]}</div>)
 
                             })}
                         </div>
                     </div>
                     <div className={'e'}>
-                        <Tl m={true}>Input your own density</Tl><InputWrapper value={density} onChange={(e) => handleDensity(e)} style={{marginLeft:30}} type={"number"}></InputWrapper>
+                        <Tl m={true}>Input your own density</Tl><InputWrapper value={density}
+                                                                              onChange={(e) => handleDensity(e)}
+                                                                              style={{marginLeft: 30}}
+                                                                              type={"number"}></InputWrapper>
                     </div>
 
 
@@ -154,7 +157,7 @@ function Step5({hook, step, data, units, theme}) {
             "  margin: 0;\n" +
             "}input[type=number] {\n" +
             "  -moz-appearance: textfield;\n" + "}" +
-            "input{margin-top:-30px}"+"@media screen and (max-width:650px){.c{float:unset !important;}input{margin-top:-15px!important}.a{margin-top:15px!important}}" +
+            "input{margin-top:-30px}" + "@media screen and (max-width:650px){.c{float:unset !important;}input{margin-top:-15px!important}.a{margin-top:15px!important}}" +
             ".a{margin-left:30px!important}.svg{max-width:75px;max-height:75px}.b{display: inline-grid;\n" +
             "text-align: center;margin-left:5px;margin-right:5px}" +
             ".c{display:flex; float:right; margin-top:-9px;}" +
@@ -162,7 +165,7 @@ function Step5({hook, step, data, units, theme}) {
             "    margin-top: 50px !important;\n" +
             "    display: inline-flex;\n" +
             "}.z{margin-top:15px;} h1{margin-bottom:5px!important}"}
-                {".plm g{fill:white !important}.plm path{fill:"+theme.main+" !important}" +
+                {".plm g{fill:white !important}.plm path{fill:" + theme.main + " !important}" +
                 "" +
                 "@media screen and (max-width:650px){" +
                 "#MAIN{" +
@@ -172,7 +175,7 @@ function Step5({hook, step, data, units, theme}) {
                 "}"}
             </style>
         </>
-    )
+}</>)
 }
 
 export default withTheme(Step5)
