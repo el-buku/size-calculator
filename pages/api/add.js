@@ -7,7 +7,7 @@ const defaultFields = [ { name: 'domain', type: 'String' },
     { name: 'user', type: 'String' }]
 
 export default async (req, res) => {
-    const {name, email, quantity, types, density, measurementUnit, sizes, ...data} = req.body.data
+    const {email, types, density, sizes, ...data} = req.body.data
     const dataFields = (() => {
         var ret = []
         for (const [key, value] of Object.entries(data)) {
