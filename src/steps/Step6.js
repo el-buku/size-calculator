@@ -132,7 +132,7 @@ export default function Step6({hook, step, data, units, sizes}) {
                 </Main>
             <Pagination step={step - 1} hook={hook} data={data} hideRight={true}/>
             <style>
-                {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}" +
+                {".wrap{margin-top:0px!important}input{height:7vw !important;width:100%!important;padding-right:20vw !important;font-size:3vw !important}" +
                 "@media screen and (max-width:650px){input{padding-right:28vw !important}}"}
             </style>
 
@@ -161,7 +161,7 @@ function NoSize({hook, data, step}) {
         </Main>
             <Pagination step={step - 1} hook={hook} data={data} hideRight={true}/>
             <style>
-                {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}" +
+                {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important; }" +
                 "@media screen and (max-width:650px){input{padding-right:28vw !important}}"}
             </style>
 

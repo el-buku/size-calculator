@@ -7,13 +7,13 @@ const defaultFields = [ { name: 'domain', type: 'String' },
     { name: 'user', type: 'String' }]
 
 export default async (req, res) => {
-    const {email, types, density, sizes, ...data} = req.body.data
+    const {email, types, density, sizes, domain, ...data} = req.body.data
     const dataFields = (() => {
         var ret = []
         for (const [key, value] of Object.entries(data)) {
-            if(key!='domain')
+            if(key!='name')
             ret.push({key:key.toUpperCase(), value:value});
-            else ret.push({key:"DOMAIN_ORIGIN", value:value})
+            else ret.push({key:"FIRSTNAME", value:value})
         }
         return ret
     })()
