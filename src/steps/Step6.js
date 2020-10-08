@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {
+    Main,
     Title,
     T1,
     Pagination,
@@ -111,7 +112,9 @@ export default function Step6({hook, step, data, units, sizes}) {
     console.log(size)
     return (
         <> {size == undefined ? <NoSize hook={hook} data={data} step={step}/> : (<>
-            <Subtitle>
+                <Main id={"MAIN"}>
+
+                <Subtitle>
                 Your results are ready!
             </Subtitle>
             <Title>
@@ -126,7 +129,7 @@ export default function Step6({hook, step, data, units, sizes}) {
 
             </Wrapper>
             <Bottom>{err ? 'Please use a valid email address' : 'Check your email for your results as well as a promo code for your next purchase!'}</Bottom>
-
+                </Main>
             <Pagination step={step - 1} hook={hook} data={data} hideRight={true}/>
             <style>
                 {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}" +
@@ -140,8 +143,9 @@ export default function Step6({hook, step, data, units, sizes}) {
 
 function NoSize({hook, data, step}) {
     return (
-        <>
-            {/*<Subtitle>*/}
+        <>        <Main id={"MAIN"}>
+
+        {/*<Subtitle>*/}
             {/*    Your results are ready!*/}
             {/*</Subtitle>*/}
             <Title>
@@ -154,7 +158,7 @@ function NoSize({hook, data, step}) {
 
             </Wrapper>
             {/*<Bottom>{err ? 'Please use a valid email address' : 'Check your email for your results as well as a promo code for your next purchase!'}</Bottom>*/}
-
+        </Main>
             <Pagination step={step - 1} hook={hook} data={data} hideRight={true}/>
             <style>
                 {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}" +

@@ -6,6 +6,7 @@ import {
     Wrapper,
     StartButton, bgCol
 } from "../src/styled";
+import Step0 from "../src/steps/Step0"
 import Step1 from "../src/steps/Step1"
 import Step2 from "../src/steps/Step2"
 import Step3 from "../src/steps/Step3"
@@ -15,6 +16,7 @@ import Step6 from "../src/steps/Step6"
 import Step7 from "../src/steps/Step7"
 
 const initialState = {
+    name:null,
     capsuleSize: null,
     ingredientType: null,
     density: 1,
@@ -38,7 +40,7 @@ const units = {
         // {name: '1 Cup', value: '1 cup'}
     ],
     mass: [
-        {name: 'Miligrams (mg)', value: 'mg'},
+        {name: 'Milligrams (mg)', value: 'mg'},
         {name: 'Micrograms (mcg)', value: 'mcg'},
         {name: 'Grams (g)', value: 'g'},
         // {name: 'Kilograms (kg)', value: 'kg'},
@@ -56,9 +58,7 @@ function App({domain}) {
                 "   background-color:" + bgCol +
                 "}"}
             </style>
-            <Main id={'MAIN'}>
                 {!start ? <Default hook={useStart}/> : <Start domain={domain}/>}
-            </Main>
         </Container>
     );
 }
@@ -69,6 +69,8 @@ function App({domain}) {
 function Default({hook}) {
     return (
         <>
+            <Main id={"MAIN"}>
+
             <Title>
                 Let's find the right capsule size for you
             </Title>
@@ -77,7 +79,7 @@ function Default({hook}) {
                     Get Started
                 </StartButton>
             </Wrapper>
-
+            </Main>
         </>
     )
 }
@@ -112,18 +114,20 @@ class Start extends React.Component {
         const getComponent = (step) => {
             switch (step) {
                 case 1:
-                    return Step1;
+                    return Step0;
                 case 2:
-                    return Step2;
+                    return Step1;
                 case 3:
-                    return Step3;
+                    return Step2;
                 case 4:
-                    return Step4;
+                    return Step3;
                 case 5:
-                    return Step5;
+                    return Step4;
                 case 6:
-                    return Step6;
+                    return Step5;
                 case 7:
+                    return Step6;
+                case 8:
                     return Step7;
             }
         }

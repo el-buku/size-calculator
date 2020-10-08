@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {
+    Main,
     Title,
     T1,
     Pagination,
@@ -94,6 +95,8 @@ export default function Step7({hook, step, data, sizes}) {
     }
     return (
         <>
+            <Main id={"MAIN"}>
+
             <Subtitle>
                 Recommended
             </Subtitle>
@@ -117,6 +120,7 @@ export default function Step7({hook, step, data, sizes}) {
                 </div>
 
             </Wrapper>
+            </Main>
             <Pagination step={step} hook={hook} data={data} hideRight={true}/>
             <style>
                 {".wrap{margin-top:0px!important}input{width:100%!important;padding-right:20vw !important;font-size:3vw !important}.a{margin:auto}" +

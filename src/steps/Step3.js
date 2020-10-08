@@ -1,8 +1,11 @@
 import {useState} from 'react'
-import {Title, Wrapper, T1, Pagination, Subtitle, textSelected, textNotSelected} from '../styled'
+import {Main,Title, Wrapper, T1, Pagination, Subtitle, textSelected, textNotSelected, hoverColor} from '../styled'
 import styled from 'styled-components'
 
 const Li= styled(T1)`
+    &:hover{
+        color: ${props => props.selected ? textSelected : hoverColor}
+    }
     font-size:2em;
     font-weight: 900;
     color:${props=>props.selected?textSelected:textNotSelected};
@@ -21,6 +24,8 @@ export default function Step3({hook, step, data, units}) {
     console.log(usedUnits)
     return (
         <>
+            <Main id={"MAIN"}>
+
             <Subtitle>
                 Measurements
             </Subtitle>
@@ -37,6 +42,7 @@ export default function Step3({hook, step, data, units}) {
             <style>
                 {".a g{fill:white !important}.a path{fill:"+textNotSelected+" !important}"}
             </style>
+            </Main>
             <Pagination step={step} hook={hook} data={data} hideRight={true}/>
         </>
     )

@@ -1,20 +1,22 @@
 import 'bulma/css/bulma.css'
 import Head from 'next/head'
 import {useState} from 'react'
-import {ThemeProvider} from 'styled-components'
+import {ThemeProvider, createGlobalStyle} from 'styled-components'
+
+
 
 function MyApp({Component, pageProps, stars}) {
     const domain = stars.domain
     var col
     if(domain!='kcaps')
         col='gold'
-    else col = '#1e8065'
+    else col = '#009E95'
     const theme={main:col}
     return (
         <><Head>
-            <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;900&display=swap" rel="stylesheet"/>
                 <title>Size Calculator</title>
-            <style>{`.pagination div svg path{fill:${col}`}</style>
+            <style>{"  @font-face {\n    font-family: 'nunito';\n      src: url('/GOTHIC.woff2');\n      src: url('/GOTHICB.woff2')\n  }"}</style>
+            <style>{`.pagination div svg path{fill:${col}}html{height:100%;overflow:hidden}#__next{height:100%;overflow:hidden}body{height:100%;overflow:hidden}body::-webkit-scrollbar{display:none}` }</style>
         </Head>
             <ThemeProvider theme={theme}>
             <Component {...pageProps} domain={domain}/>

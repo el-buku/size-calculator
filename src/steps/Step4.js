@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {
+    Main,
     Title,
     Wrapper,
     T1,
@@ -9,13 +10,17 @@ import {
     textNotSelected,
     Btn,
     InputWrapper,
-    bottomOffset
+    bottomOffset,
+    hoverColor,
 } from '../styled'
 import {getQtyMl, getMlToQty, getQtyToG} from '../'
 import styled from 'styled-components'
 
 
 const Li = styled(T1)`
+    &:hover{
+        color: ${props => props.selected ? textSelected : hoverColor}
+    }
     color:${props => props.selected ? textSelected : textNotSelected};
     font-size: 1.5vw;
     @media screen and (max-width: 650px){
@@ -37,8 +42,10 @@ const Bottom = styled(T1)`
 
 export default function Step4({hook, step, data, units, sizes}) {
     const [quantity, setQuantity] = useState(data.quantity)
+    const [measurementUnit, setUnit] = useState(data.measurementUnit)
+    data.measurementUnit = measurementUnit
     data.quantity = quantity
-    const {ingredientType, measurementUnit, user} = data
+    const {ingredientType, user} = data
     var usedUnits = []
     var type
     if (ingredientType == 'liquid') {
@@ -49,10 +56,8 @@ export default function Step4({hook, step, data, units, sizes}) {
         type = "Mass"
     }
     const handleQuantity = (e) => {
-        e.preventDefault()
         var quantity = e.target.value
-        if (quantity && parseFloat(quantity) >= 0) {
-            if (parseFloat(quantity)) {
+        if (parseFloat(quantity) >= 0) {
                 var siz = sizes
                 var mls, gs
                 if (user == 'children') {
@@ -89,12 +94,14 @@ export default function Step4({hook, step, data, units, sizes}) {
                 }
 
             }
-        } else {
-            setQuantity('')
+        else {
+            setQuantity(0)
         }
     }
     return (
         <>
+            <Main id={"MAIN"}>
+
             <Subtitle>
                 {type} Measurements
             </Subtitle>
@@ -111,24 +118,26 @@ export default function Step4({hook, step, data, units, sizes}) {
                     </Btn>
                     <ul style={{marginTop: 20, padding:0}}>
                         {usedUnits.map(unititem =>
-                            <li key={unititem.value}><Li selected={unititem.value == measurementUnit ? true : false}><a
+                            <li key={unititem.value} onClick={()=>setUnit(unititem.value)}><Li selected={unititem.value == measurementUnit ? true : false}><a
                                 style={{color: 'inherit'}}>• {unititem.name}</a></Li></li>
                         )}
                     </ul>
                 </div>
 
             </Wrapper>
+            </Main>
             <Bottom>{quantity ? quantity : 0} {measurementUnit} per capsule</Bottom>
 
             <Pagination step={step} hook={hook} data={data} disableRight={quantity ? false : true}/>
             <style>
-                {".wrap{margin-top:0px!important}"}
+                {".wrap{margin-top:0px!important}" +
+                ".pagination{}"}
             </style>
             <style>{"input::-webkit-outer-spin-button,\n" +
             "input::-webkit-inner-spin-button {\n" +
             "  -webkit-appearance: none;\n" +
             "  margin: 0;\n" +
-            "}input[type=number] {\n" +
+            "}input[type=number] {\n height:7vw;" +
             "  -moz-appearance: textfield;\n" + "}" +
             ""}</style>
         </>

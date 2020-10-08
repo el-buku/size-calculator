@@ -12,6 +12,7 @@ const secondaryCol = '#d4d4d4ff'
 const textSelected = '#2c2825ff'
 const textNotSelected = '#d4d4d4ff'
 const bottomOffset = '15px'
+const hoverColor = `#b5b5b5`
 
 const getSelected = keyframes`
     from {background-color: ${secondaryCol};}
@@ -20,18 +21,23 @@ const getSelected = keyframes`
 
 const Container = styled.div`
     background-color:${bgCol};
+    height:100%;
+    position:relative;
 `
 const Main = styled.div`
     background-color:${bgCol};
     padding:25px;
-    height:100%;
+    height:fit-content;
     width: 100%;
     margin: 0;
     position: absolute;
-    top:35%;
-    padding-top: 80px;
-    -ms-transform: translateY(-35%);
-    transform: translateY(-35%);
+    top: 50%;
+    transform: translateY(-60%);
+    clear: both;
+    // top:35%;
+    // padding-top: 80px;
+    // -ms-transform: translateY(-35%);
+    // transform: translateY(-35%);
     @media screen and (min-width:650px){
         padding-bottom:30px
     }
@@ -102,16 +108,19 @@ const InputWrapper = styled.input`
 `
 
 const Btn = styled.button`
+    &:hover{
+        background:${props => props.selected ? props=>props.theme.main : hoverColor};
+    }
     font-family: ${font1};
     font-weight: 900;
-    font-size:2.5vw;
+    font-size:2vw;
     background-color:${props => props.selected ? props=>props.theme.main : secondaryCol};
     animation:${props => props.selected ? getSelected : null} 0.3s;
     color: white;
     border-radius: 10vw;
     border: none;
     margin:auto;
-    height: 10vw;
+    height: 7vw;
     width: 20vw;
     margin-left: ${props => props.ml ? props.ml : null};
     margin-right:${props => props.mr ? props.mr : null};
@@ -124,14 +133,14 @@ const Btn = styled.button`
 `
 const Left = styled.div`
     position:absolute;
-    bottom:${bottomOffset};
-    float: left;
+    bottom:0;
+    left:5px;
 `
 const Right = styled.div`
-    float: right;
+    // float: right;
     position:absolute;
-    bottom:${bottomOffset};
-    right: 25px;
+    bottom:0;
+    right: 5px;
     pointer-events: ${props => props.disabled ? 'none' : ''}
 `
 const StartButton = ({onClick, children, mr, ml, sel}) => {
@@ -152,9 +161,9 @@ const Textspan = styled.span`
     bottom: 17.5px;
 `
 
-const Pagination = ({hook, hideLeft, disableRight, step, data, mTop = 20, hideRight}) => {
+const Pagination = ({hook, hideLeft, disableRight, step, data, mTop = 0, hideRight}) => {
     return (
-        <div className={'pagination'} style={{marginTop: mTop}}>
+        <div className={'pagination'} style={{position:'absolute', bottom:15, width:'100%', left:2, margin:0}}>
             {hideLeft ? null : <Left onClick={() => {
                 hook(step - 2)
             }}>
@@ -194,5 +203,6 @@ export {
     textNotSelected,
     InputWrapper,
     bottomOffset,
-    primaryCol, bgCol
+    primaryCol, bgCol,
+    hoverColor
 }

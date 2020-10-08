@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@zeit/next-css": "^1.0.1",
     "babel-plugin-inline-react-svg": "^1.1.1",
     "babel-plugin-styled-components": "^1.11.1",
     "bloomer": "^0.6.5",
@@ -16,6 +17,7 @@
     "dotmailer": "^3.0.1",
     "js-quantities": "^1.7.5",
     "next": "9.5.3",
+    "next-fonts": "^1.4.0",
     "next-images": "^1.6.0",
     "next-react-svg": "^1.1.2",
     "nodemon": "^2.0.4",

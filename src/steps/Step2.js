@@ -1,12 +1,12 @@
 import {useState} from 'react'
-import {Title, Wrapper, Btn, Pagination, Subtitle, T1, T2, textNotSelected} from '../styled'
+import {Main,Title, Wrapper, Btn, Pagination, Subtitle, T1, T2, textNotSelected} from '../styled'
 import Kids from '../../public/svgs/kids.svg'
 import Adults from '../../public/svgs/adults.svg'
 import Elderly from '../../public/svgs/elderly.svg'
 import Pets from '../../public/svgs/pets.svg'
 
 const style={
-    height:'15vw',width:'15vw'
+    height:'12vw',width:'12vw'
 }
 
 export default function Step2({hook, step, data}) {
@@ -29,6 +29,7 @@ export default function Step2({hook, step, data}) {
     }
     return (
         <>
+        <Main id={'MAIN'}>
             <Subtitle>
                 PATIENT
             </Subtitle>
@@ -49,13 +50,16 @@ export default function Step2({hook, step, data}) {
                     )
                 })}
             </Wrapper>
-            <Pagination step={step} hook={hook} data={data} hideRight={true}/>
             <style>
                 {"button{    width: 19vw !important;\n" +
                 "    height: 19vw !important;\n" +
-                "    border-radius: 80px !important;}"}
+                "    border-radius: 80px !important;}" +
+                "#MAIN{height:35vw} @media screen and (max-width: 650px){#MAIN{height:100vw}}"}
 
             </style>
-        </>
-    )
+        </Main>
+    <Pagination step={step} hook={hook} data={data} hideRight={true}/>
+    </>
+
+)
 }

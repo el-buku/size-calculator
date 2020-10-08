@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {
+    Main,
     Title,
     T1,
     Pagination,
@@ -9,6 +10,7 @@ import {
     Btn,
     InputWrapper,
     bottomOffset,
+    hoverColor
 } from '../styled'
 import styled, {withTheme} from 'styled-components'
 import D1 from '../../public/svgs/density1.svg'
@@ -110,6 +112,8 @@ function Step5({hook, step, data, units, theme}) {
 
     return (<>
         {ingredientType == 'liquid' ? hook(step, data) : <>
+            <Main id={"MAIN"}>
+
             <Subtitle>
                 {type} Measurements
             </Subtitle>
@@ -146,7 +150,7 @@ function Step5({hook, step, data, units, theme}) {
                 </div>
 
             </Wrapper>
-
+            </Main>
             <Pagination step={step} hook={hook} data={data} disableRight={density ? false : true}/>
             <style>
                 {".wrap{margin-top:0px!important}"}
@@ -158,7 +162,9 @@ function Step5({hook, step, data, units, theme}) {
             "}input[type=number] {\n" +
             "  -moz-appearance: textfield;\n" + "}" +
             "input{margin-top:-30px}" + "@media screen and (max-width:650px){.c{float:unset !important;}input{margin-top:-15px!important}.a{margin-top:15px!important}}" +
-            ".a{margin-left:30px!important}.svg{max-width:75px;max-height:75px}.b{display: inline-grid;\n" +
+            ".a{margin-left:30px!important}.svg{max-width:75px;max-height:75px}" +
+            ".svg:hover path{fill:"+hoverColor+"}" +
+            ".b{display: inline-grid;\n" +
             "text-align: center;margin-left:5px;margin-right:5px}" +
             ".c{display:flex; float:right; margin-top:-9px;}" +
             ".e{\n" +
