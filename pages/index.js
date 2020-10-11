@@ -32,7 +32,7 @@ const units = {
     volume: [
         {name: 'Tea Spoon (TS)', value: 'ts'},
         {name: 'Table Spoon (TBS)', value: 'tbs'},
-        {name: 'Mililiter (mL)', value: 'ml'},
+        {name: 'Milliliter (mL)', value: 'ml'},
         {name: 'Cubic Centimeter (CC)', value: 'cc'},
         // {name: '1/8 Cup', value: '1/8 cup'},
         // {name: '1/4 Cup', value: '1/4 cup'},

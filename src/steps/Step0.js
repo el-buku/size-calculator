@@ -53,10 +53,12 @@ export default function Step0({hook, step, data}){
         setName(name)
     }
     const handleClick = () => {
-        setSelected(true)
-        setTimeout(()=>{
-            hook(step,data)
-        }, 500)
+        if(name!=''){
+            setSelected(true)
+            setTimeout(()=>{
+                hook(step,data)
+            }, 500)
+        }
     }
     return(<>
         <Main id={"MAIN"}>

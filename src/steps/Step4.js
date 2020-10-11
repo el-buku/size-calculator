@@ -40,9 +40,12 @@ const Bottom = styled(T1)`
     }
 `
 
+const red = '#f5424e'
+
 export default function Step4({hook, step, data, units, sizes}) {
     const [quantity, setQuantity] = useState(data.quantity)
     const [measurementUnit, setUnit] = useState(data.measurementUnit)
+    const [check, setCheck] = useState(false)
     data.measurementUnit = measurementUnit
     data.quantity = quantity
     const {ingredientType, user} = data
@@ -69,17 +72,20 @@ export default function Step4({hook, step, data, units, sizes}) {
                 const maxml = siz[0][1]
                 if (ingredientType == 'liquid') {
                     mls = getQtyMl(parseFloat(quantity), measurementUnit)
-                    if (mls <= maxml * 0.8)
+                    if (mls <= maxml * 0.8){
                         setQuantity(parseFloat(quantity))
+                        setCheck(false)}
                     else {
                         quantity = getMlToQty(maxml * 0.8, measurementUnit)
+                        setCheck(true)
                         setQuantity(parseFloat(quantity.toFixed(3)))
                     }
                 } else {
                     gs = getQtyToG(quantity, measurementUnit)
                     mls = gs * data.density
-                    if (mls <= maxml * 0.8)
+                    if (mls <= maxml * 0.8){
                         setQuantity(parseFloat(quantity))
+                        setCheck(false)}
                     else {
                         quantity = maxml*0.8*data.density
                         switch (measurementUnit){
@@ -89,6 +95,7 @@ export default function Step4({hook, step, data, units, sizes}) {
                             case 'mg':
                                 quantity=quantity*1000
                         }
+                        setCheck(true)
                         setQuantity(parseFloat(quantity.toFixed(3)))
                     }
                 }
@@ -111,6 +118,8 @@ export default function Step4({hook, step, data, units, sizes}) {
             <Wrapper>
                 <div style={{width: 'fit-content', marginRight: 20}} className={'wrap'}>
                     <InputWrapper value={quantity} onChange={(e) => handleQuantity(e)} type={"number"}/>
+                    {check?<><style>{`input{border: solid 0.05em ${red}!important}`}</style>
+                        <T1 style={{margin:'auto', textAlign:'center', marginTop:'10px', color:red}}>Value is over the capsule limit</T1></>:null}
                 </div>
                 <div style={{width: 'fit-content', marginLeft: 20}}>
                     <Btn selected={true}>
