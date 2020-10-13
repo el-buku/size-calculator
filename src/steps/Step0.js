@@ -39,6 +39,7 @@ const InnerWrapper = styled.div`
         width: 80vw;
         input {
             padding-right: 28.5vw;
+            height: 12vw;
         }
     }
 `

@@ -148,7 +148,7 @@ export default function Step4({hook, step, data, units, sizes}) {
             "  margin: 0;\n" +
             "}input[type=number] {\n height:7vw;" +
             "  -moz-appearance: textfield;\n" + "}" +
-            ""}</style>
+            "@media screen and (max-width: 650px){input[type=number]{height:12vw}}"}</style>
         </>
     )
 }

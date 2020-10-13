@@ -11,7 +11,8 @@ const style={
 
 export default function Step2({hook, step, data}) {
     const [user, setUser] = useState(data.user);
-    const values = ['children', 'elderly', 'adults', 'pets'];
+    var values = ['children', 'elderly', 'adults', 'pets'];
+    if(data.domain=='kcaps') values=['children', 'elderly', 'adults']
     data.user = user
     const getCompByVal = (val) =>{
         var selected

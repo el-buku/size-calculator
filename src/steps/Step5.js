@@ -175,7 +175,6 @@ function Step5({hook, step, data, units, theme}) {
                 "" +
                 "@media screen and (max-width:650px){" +
                 "#MAIN{" +
-                "    height: 126%;\n" +
                 "    width: fit-content;" +
                 "}" +
                 "}"}
