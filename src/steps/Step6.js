@@ -22,7 +22,7 @@ const Li = styled(T1)`
     }
 `
 const Bottom = styled(T1)`
-    font-size:2em;
+    font-size:1.5em;
     text-align: center;
     line-height: 3vw;
     font-weight: 900;

@@ -1,10 +1,10 @@
 import {useState} from 'react'
 import {Main,Title, Wrapper, T1, Pagination, Subtitle, textSelected, textNotSelected, hoverColor} from '../styled'
-import styled from 'styled-components'
+import styled, {withTheme} from 'styled-components'
 
-const Li= styled(T1)`
+const Li= styled(withTheme(T1))`
     &:hover{
-        color: ${props => props.selected ? textSelected : hoverColor}
+        color: ${props => props.selected ? textSelected : props.theme.hoverCol2}
     }
     font-size:2em;
     font-weight: 900;

@@ -1,9 +1,9 @@
 import {useState} from 'react'
 import {Main,Title, Wrapper, Btn, Pagination, Subtitle, T1, T2, textNotSelected} from '../styled'
-import Kids from '../../public/svgs/kids.svg'
+import Kids from '../../public/svgs/kds.svg'
 import Adults from '../../public/svgs/adults.svg'
 import Elderly from '../../public/svgs/elderly.svg'
-import Pets from '../../public/svgs/pets.svg'
+import Pets from '../../public/svgs/pts.svg'
 
 const style={
     height:'12vw',width:'12vw'
@@ -11,7 +11,7 @@ const style={
 
 export default function Step2({hook, step, data}) {
     const [user, setUser] = useState(data.user);
-    var values = ['children', 'elderly', 'adults', 'pets'];
+    var values = ['adults','children','elderly', 'pets'];
     if(data.domain=='kcaps') values=['children', 'elderly', 'adults']
     data.user = user
     const getCompByVal = (val) =>{

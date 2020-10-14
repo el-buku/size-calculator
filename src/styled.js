@@ -7,10 +7,10 @@ import ArrowRight from '../public/svgs/arrowright.svg'
 const font1 = 'nunito'
 const font2 = 'nunito'
 const bgCol = '#f2f2f2ff'
-const primaryCol = '#f8d858ff'
+const primaryCol = '#f8d858'
 const secondaryCol = '#d4d4d4ff'
 const textSelected = '#2c2825ff'
-const textNotSelected = '#d4d4d4ff'
+const textNotSelected = '#989898'
 const bottomOffset = '15px'
 const hoverColor = `#b5b5b5`
 
@@ -114,7 +114,7 @@ const Btn = styled.button`
     font-family: ${font1};
     font-weight: 900;
     font-size:2vw;
-    background-color:${props => props.selected ? props=>props.theme.main : secondaryCol};
+    background-color:${props => props.selected ? props=>props.theme.main : props.theme.col2};
     animation:${props => props.selected ? getSelected : null} 0.3s;
     color: white;
     border-radius: 10vw;

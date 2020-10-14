@@ -14,12 +14,12 @@ import {
     hoverColor,
 } from '../styled'
 import {getQtyMl, getMlToQty, getQtyToG} from '../'
-import styled from 'styled-components'
+import styled, {withTheme} from 'styled-components'
 
 
-const Li = styled(T1)`
+const Li = styled(withTheme(T1))`
     &:hover{
-        color: ${props => props.selected ? textSelected : hoverColor}
+        color: ${props => props.selected ? textSelected : props.theme.hoverCol2}
     }
     color:${props => props.selected ? textSelected : textNotSelected};
     font-size: 1.5vw;

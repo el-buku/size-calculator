@@ -74,7 +74,9 @@ const InnerWrapper = styled.div`
 
 const Button = styled(Btn)`
     height:8vw;
-    width:100%;
+    width:70%;
+    // display:block;
+    margin:auto;
 `
 
 export default function Step7({hook, step, data, sizes}) {
