@@ -74,6 +74,9 @@ function Default({hook}) {
             <Title>
                 Let's find the right capsule size for you
             </Title>
+                <style>
+                    {"@media screen and (max-width: 650px){button{transform: scale(1.5);}}"}
+                </style>
             <Wrapper>
                 <StartButton onClick={() => hook(true)}>
                     Get Started
