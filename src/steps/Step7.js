@@ -94,7 +94,7 @@ export default function Step7({hook, step, data, sizes}) {
             url=`https://capsuline.com/collections/empty-capsules-size-${capsuleSize}/#utm_source=sizechart_results&utm_medium=survey&utm_campaign=leads`
         else url=`https://www.kcaps.com/collections/all-k-caps/size-${capsuleSize}`
         console.log(url)
-        window.location.href=url
+        window.open(url)
     }
     return (
         <>
