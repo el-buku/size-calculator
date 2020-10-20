@@ -26,7 +26,7 @@ export default async (req, res) => {
         }
         , dotmailer = require('dotmailer')(config)
         , addressBookId = 36103586
-
+    console.log(dataFields)
     var apiResponse = await new Promise(resolve => {
         dotmailer({
             endpoint: 'PostAddressBookContacts',

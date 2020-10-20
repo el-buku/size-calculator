@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@hubspot/api-client": "^3.0.1",
     "@material-ui/core": "^4.11.0",
     "@zeit/next-css": "^1.0.1",
     "babel-plugin-inline-react-svg": "^1.1.1",
@@ -15,6 +16,7 @@
     "bloomer": "^0.6.5",
     "bulma": "^0.9.0",
     "dotmailer": "^3.0.1",
+    "hubspot": "^2.3.13",
     "js-quantities": "^1.7.5",
     "next": "9.5.3",
     "next-fonts": "^1.4.0",
