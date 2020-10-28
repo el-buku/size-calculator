@@ -6,7 +6,6 @@ import Powder from '../../public/svgs/powdercaps.svg'
 export default function Step1({hook, step, data, sizes}) {
     const [ingredientType, setType] = useState(data.ingredientType)
     data.ingredientType = ingredientType
-    console.log(data)
     data.sizes=sizes
     return (
         <>

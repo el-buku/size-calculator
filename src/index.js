@@ -10,7 +10,6 @@ export const getSize = (data, sizes) => {
         }   else if (user=='pets' && data.domain=='capsuline') {
             siz = [['1', 0.48], ['3', 0.27]]
         }
-        console.log(siz)
         for (var size of siz) {
             if (ml <= size[1] * 0.8)
                 ret.push(size[0])
@@ -26,8 +25,6 @@ export const getSize = (data, sizes) => {
     } else {
         capsuleMl=getQtyMl(quantity, measurementUnit)
     }
-    console.log('pulaaa'+sizes)
-    console.log(capsuleMl, user, sizes)
     const recommendedSizes = getSizes(capsuleMl, user, sizes)
     return recommendedSizes.reverse()[0]
 

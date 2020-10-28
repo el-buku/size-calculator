@@ -21,7 +21,6 @@ export default function Step3({hook, step, data, units}) {
     var usedUnits = []
     if(ingredientType=='liquid') usedUnits=units.volume;
     else usedUnits=units.mass;
-    console.log(usedUnits)
     return (
         <>
             <Main id={"MAIN"}>

@@ -91,7 +91,6 @@ export default function Step6({hook, step, data, units, sizes}) {
     const handleChange = (e) => {
         e.preventDefault()
         const email = e.target.value
-        console.log(email)
         setEmail(e.target.value)
     }
     const handleClick = () => {
